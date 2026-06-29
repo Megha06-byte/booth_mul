@@ -17,8 +17,11 @@ wire done;
 //--------------------------------------------------
 // DUT
 //--------------------------------------------------
+integer acc_toggles = 0;
 
-booth_multiplier_seq #(
+reg [WIDTH:0] prev_A;
+
+seq_multiplier #(
     .WIDTH(WIDTH)
 ) dut (
     .clk(clk),
@@ -101,6 +104,9 @@ initial begin
     start = 1'b0;
     ip_A  = '0;
     ip_B  = '0;
+
+    prev_A = '0;
+    acc_toggles = 0;
 
     repeat(2) @(posedge clk);
 
@@ -186,3 +192,5 @@ initial begin
 end
 
 endmodule
+
+
